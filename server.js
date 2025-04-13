@@ -1,6 +1,10 @@
+// Load environment variables from .env file
+require('dotenv').config();
+
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const url = require('url');
 
 const PORT = process.env.PORT || 3000;
 
@@ -33,6 +37,17 @@ const server = http.createServer((req, res) => {
     // Get file extension
     const extname = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[extname] || 'application/octet-stream';
+
+    // Special route for environment variables
+    if (req.url === '/env-config.js') {
+        res.writeHead(200, { 'Content-Type': 'application/javascript' });
+        res.end(`window.ENV = {
+            SUPABASE_URL: "${process.env.SUPABASE_URL || ''}",
+            SUPABASE_KEY: "${process.env.SUPABASE_KEY || ''}",
+            DOCUMENTS_TABLE: "${process.env.DOCUMENTS_TABLE || 'json_documents'}"
+        };`);
+        return;
+    }
 
     // Read file
     fs.readFile(filePath, (err, content) => {

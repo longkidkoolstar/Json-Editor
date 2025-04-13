@@ -1,16 +1,32 @@
-// Supabase configuration
-// Use import.meta.env for Vite in development, which will be replaced during build
-const SUPABASE_URL = import.meta.env?.VITE_SUPABASE_URL || 'https://tdnqlrgmawelafiffuvd.supabase.co';
-const SUPABASE_KEY = import.meta.env?.VITE_SUPABASE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRkbnFscmdtYXdlbGFmaWZmdXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ1NDk5MDAsImV4cCI6MjA2MDEyNTkwMH0.OGJnGwWUukiXtNPevBU51_GnfQZveKC9P7_GvJBqmQw';
+// Supabase configuration from environment variables
+const SUPABASE_URL = window.ENV?.SUPABASE_URL || '';
+const SUPABASE_KEY = window.ENV?.SUPABASE_KEY || '';
+
+// Log configuration (without sensitive data in production)
+console.log('Using Supabase URL:', SUPABASE_URL);
 
 // Initialize Supabase client
-window.supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// Table names
-window.DOCUMENTS_TABLE = 'json_documents';
+// Table names from environment variables
+const DOCUMENTS_TABLE = window.ENV?.DOCUMENTS_TABLE || 'json_documents';
 
-// Log configuration status (for debugging)
-console.log('Supabase configuration loaded:', {
-    url: SUPABASE_URL ? 'Configured' : 'Missing',
-    key: SUPABASE_KEY ? 'Configured (length: ' + SUPABASE_KEY.length + ')' : 'Missing'
-});
+// Validate configuration
+if (!SUPABASE_URL || !SUPABASE_KEY) {
+    console.error('Missing Supabase configuration. Please check your environment variables.');
+    // Show an error message to the user
+    document.addEventListener('DOMContentLoaded', () => {
+        const errorDiv = document.createElement('div');
+        errorDiv.style.position = 'fixed';
+        errorDiv.style.top = '0';
+        errorDiv.style.left = '0';
+        errorDiv.style.right = '0';
+        errorDiv.style.padding = '10px';
+        errorDiv.style.backgroundColor = '#f8d7da';
+        errorDiv.style.color = '#721c24';
+        errorDiv.style.textAlign = 'center';
+        errorDiv.style.zIndex = '9999';
+        errorDiv.textContent = 'Error: Missing Supabase configuration. Please check your environment variables.';
+        document.body.prepend(errorDiv);
+    });
+}

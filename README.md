@@ -28,87 +28,47 @@ cd json-editor
 
 ### 3. Configure the application
 
-1. Create a `.env` file in the root directory based on `.env.example`
-2. Add your Supabase URL and anon key to the `.env` file:
-
-```
-VITE_SUPABASE_URL=https://your-supabase-url.supabase.co
-VITE_SUPABASE_KEY=your-supabase-anon-key
-```
-
-> **Note**: The `.env` file contains sensitive information and should never be committed to your repository.
-
-### 4. Install dependencies
+1. Copy the `.env.example` file to `.env`:
 
 ```bash
+cp .env.example .env
+```
+
+2. Edit the `.env` file and add your Supabase URL and anon key:
+
+```
+SUPABASE_URL=https://your-supabase-url.supabase.co
+SUPABASE_KEY=your-supabase-anon-key
+DOCUMENTS_TABLE=json_documents
+```
+
+### 4. Run the application
+
+You can use any local server to run the application. For example:
+
+#### Using Python:
+
+```bash
+# Python 3
+python -m http.server
+
+# Python 2
+python -m SimpleHTTPServer
+```
+
+#### Using Node.js (recommended):
+
+```bash
+# Install dependencies
 npm install
+
+# Run the server with environment variables
+npm run dev:local
 ```
 
-### 5. Run the application
+This will start the server with the environment variables from your `.env` file.
 
-#### Development mode
-
-```bash
-npm run dev
-```
-
-This will start a development server with hot-reloading at `http://localhost:3000`.
-
-#### Production build
-
-```bash
-npm run build
-```
-
-This will create a production-ready build in the `dist` directory.
-
-#### Deployment script
-
-```bash
-npm run deploy
-```
-
-This script will:
-1. Check for a `.env` file and create one from `.env.example` if needed
-2. Build the application for production
-3. Provide instructions for deploying to your hosting provider
-
-### 6. Deployment
-
-After building the application, you can deploy it to various hosting platforms:
-
-#### Option 1: Vercel (Recommended)
-
-We've included a detailed guide for deploying to Vercel:
-
-```bash
-# View the Vercel deployment guide
-cat VERCEL_DEPLOYMENT.md
-```
-
-Or simply run:
-
-```bash
-npm run deploy:vercel
-```
-
-#### Option 2: Other static hosting (Netlify, GitHub Pages)
-
-1. Build the application: `npm run build`
-2. Deploy the `dist` directory to your hosting provider
-
-#### Option 3: Node.js hosting
-
-1. Build the application: `npm run build`
-2. Copy the `dist` directory to your server
-3. Serve the files using a web server like Nginx or Apache
-
-#### Environment Variables in Production
-
-When deploying to production, you'll need to set the environment variables on your hosting platform:
-
-- For Netlify/Vercel: Configure environment variables in their dashboard (use `VITE_SUPABASE_URL` and `VITE_SUPABASE_KEY`)
-- For traditional hosting: Set environment variables on your server or use a `.env` file
+Then open your browser and navigate to `http://localhost:3000` (or whatever port you've configured in your environment variables).
 
 ## Usage
 
