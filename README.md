@@ -28,18 +28,12 @@ cd json-editor
 
 ### 3. Configure the application
 
-1. Copy the `.env.example` file to `.env`:
+1. Open `js/config.js`
+2. Replace the placeholder values with your Supabase URL and anon key:
 
-```bash
-cp .env.example .env
-```
-
-2. Edit the `.env` file and add your Supabase URL and anon key:
-
-```
-SUPABASE_URL=https://your-supabase-url.supabase.co
-SUPABASE_KEY=your-supabase-anon-key
-DOCUMENTS_TABLE=json_documents
+```javascript
+const SUPABASE_URL = 'https://your-supabase-url.supabase.co';
+const SUPABASE_KEY = 'your-supabase-anon-key';
 ```
 
 ### 4. Run the application
@@ -56,55 +50,17 @@ python -m http.server
 python -m SimpleHTTPServer
 ```
 
-#### Using Node.js (recommended):
+#### Using Node.js:
 
 ```bash
-# Install dependencies
-npm install
+# Install http-server if you haven't already
+npm install -g http-server
 
-# Run the server with environment variables
-npm run dev:local
+# Run the server
+http-server
 ```
 
-This will start the server with the environment variables from your `.env` file.
-
-Then open your browser and navigate to `http://localhost:3000` (or whatever port you've configured in your environment variables).
-
-### 5. Deployment to Vercel
-
-1. Install the Vercel CLI:
-
-```bash
-npm install -g vercel
-```
-
-2. Login to Vercel:
-
-```bash
-vercel login
-```
-
-3. Set up environment variables in Vercel:
-
-```bash
-vercel secrets add supabase_url "https://your-supabase-url.supabase.co"
-vercel secrets add supabase_key "your-supabase-anon-key"
-```
-
-4. Deploy to Vercel using our deployment script:
-
-```bash
-npm run deploy
-```
-
-This will build the project and deploy it to Vercel. Your JSON Editor will be deployed to a Vercel URL.
-
-Alternatively, you can deploy manually:
-
-```bash
-npm run build
-vercel --prod
-```
+Then open your browser and navigate to `http://localhost:8000` (or whatever port your server is using).
 
 ## Usage
 
