@@ -32,8 +32,8 @@ cd json-editor
 2. Add your Supabase URL and anon key to the `.env` file:
 
 ```
-SUPABASE_URL=https://your-supabase-url.supabase.co
-SUPABASE_KEY=your-supabase-anon-key
+VITE_SUPABASE_URL=https://your-supabase-url.supabase.co
+VITE_SUPABASE_KEY=your-supabase-anon-key
 ```
 
 > **Note**: The `.env` file contains sensitive information and should never be committed to your repository.
@@ -107,7 +107,7 @@ npm run deploy:vercel
 
 When deploying to production, you'll need to set the environment variables on your hosting platform:
 
-- For Netlify/Vercel: Configure environment variables in their dashboard
+- For Netlify/Vercel: Configure environment variables in their dashboard (use `VITE_SUPABASE_URL` and `VITE_SUPABASE_KEY`)
 - For traditional hosting: Set environment variables on your server or use a `.env` file
 
 ## Usage

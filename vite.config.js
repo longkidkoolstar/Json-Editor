@@ -5,11 +5,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export default defineConfig({
-  // Define environment variables to be replaced in the client code
-  define: {
-    'process.env.SUPABASE_URL': JSON.stringify(process.env.SUPABASE_URL || ''),
-    'process.env.SUPABASE_KEY': JSON.stringify(process.env.SUPABASE_KEY || '')
-  },
+  // Environment variables are automatically exposed by Vite when prefixed with VITE_
+  // No need to manually define them here as they're accessible via import.meta.env.VITE_*
   // Configure the build
   build: {
     outDir: 'dist',

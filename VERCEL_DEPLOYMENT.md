@@ -46,8 +46,8 @@ git push -u origin main
 5. Add Environment Variables:
    - Click "Environment Variables" section
    - Add the following variables:
-     - `SUPABASE_URL`: Your Supabase project URL
-     - `SUPABASE_KEY`: Your Supabase anon key
+     - `VITE_SUPABASE_URL`: Your Supabase project URL
+     - `VITE_SUPABASE_KEY`: Your Supabase anon key
 6. Click "Deploy"
 
 #### Option 2: Deploy using Vercel CLI
@@ -76,8 +76,8 @@ If you need to update environment variables after deployment:
 1. Go to your project in the Vercel Dashboard
 2. Click on "Settings" > "Environment Variables"
 3. Add or update the variables:
-   - `SUPABASE_URL`: Your Supabase project URL
-   - `SUPABASE_KEY`: Your Supabase anon key
+   - `VITE_SUPABASE_URL`: Your Supabase project URL
+   - `VITE_SUPABASE_KEY`: Your Supabase anon key
 4. Click "Save"
 5. Redeploy your application for the changes to take effect
 
