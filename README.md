@@ -70,6 +70,42 @@ This will start the server with the environment variables from your `.env` file.
 
 Then open your browser and navigate to `http://localhost:3000` (or whatever port you've configured in your environment variables).
 
+### 5. Deployment to Vercel
+
+1. Install the Vercel CLI:
+
+```bash
+npm install -g vercel
+```
+
+2. Login to Vercel:
+
+```bash
+vercel login
+```
+
+3. Set up environment variables in Vercel:
+
+```bash
+vercel secrets add supabase_url "https://your-supabase-url.supabase.co"
+vercel secrets add supabase_key "your-supabase-anon-key"
+```
+
+4. Deploy to Vercel using our deployment script:
+
+```bash
+npm run deploy
+```
+
+This will build the project and deploy it to Vercel. Your JSON Editor will be deployed to a Vercel URL.
+
+Alternatively, you can deploy manually:
+
+```bash
+npm run build
+vercel --prod
+```
+
 ## Usage
 
 1. **Create a new JSON document**: Click the "New" button to start with a blank document
