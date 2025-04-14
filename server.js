@@ -1,3 +1,4 @@
+require('dotenv').config();
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -23,6 +24,16 @@ const server = http.createServer((req, res) => {
     if (req.url === '/favicon.ico') {
         res.statusCode = 204;
         res.end();
+        return;
+    }
+
+    // Serve environment variables to the client
+    if (req.url === '/env-config.js') {
+        res.writeHead(200, { 'Content-Type': 'application/javascript' });
+        res.end(`window.ENV = {
+            SUPABASE_URL: '${process.env.SUPABASE_URL}',
+            SUPABASE_KEY: '${process.env.SUPABASE_KEY}'
+        };`);
         return;
     }
 

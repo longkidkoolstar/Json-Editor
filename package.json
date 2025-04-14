@@ -14,7 +14,9 @@
   ],
   "author": "",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  },
   "devDependencies": {
     "nodemon": "^2.0.22"
   }
