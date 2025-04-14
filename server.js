@@ -38,8 +38,16 @@ const server = http.createServer((req, res) => {
     }
 
     // Normalize URL path
-    let filePath = req.url === '/' ? '/index.html' : req.url;
-    filePath = path.join(__dirname, filePath);
+    let filePath;
+    if (req.url === '/') {
+        filePath = path.join(__dirname, 'public', 'index.html');
+    } else if (req.url.startsWith('/public/')) {
+        // If the URL already includes 'public', don't add it again
+        filePath = path.join(__dirname, req.url);
+    } else {
+        // For all other URLs, look in the public directory
+        filePath = path.join(__dirname, 'public', req.url);
+    }
 
     // Get file extension
     const extname = path.extname(filePath).toLowerCase();
@@ -50,7 +58,7 @@ const server = http.createServer((req, res) => {
         if (err) {
             if (err.code === 'ENOENT') {
                 // File not found
-                fs.readFile(path.join(__dirname, '/index.html'), (err, content) => {
+                fs.readFile(path.join(__dirname, 'public', '/index.html'), (err, content) => {
                     if (err) {
                         res.writeHead(500);
                         res.end('Error loading index.html');
